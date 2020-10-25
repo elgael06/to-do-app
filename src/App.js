@@ -42,7 +42,12 @@ function App() {
       ]}
     >Tareas</NavBar>
 
-    <div style={{position:'absolute',width:'calc( 100% - 20px )',height:'calc( 100% - 56px )',margin:'0 10px'}}>
+    <div style={{
+        position:'absolute',
+        width:'calc( 100% - 20px )',
+        height:'calc( 100% - 56px )',
+        margin:'0 10px',
+      }}>
       
       <WhiteSpace size='xl' />
       <SegmentedControl 

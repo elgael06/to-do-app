@@ -6,7 +6,7 @@ import React from 'react'
 export default function ListNotes({lista=[]}){
 
     const cambioStatus = (status,index) => {
-        lista[index].status = status=='pendiente' ? 'listo' : 'pendiente';
+        lista[index].status = status === 'pendiente' ? 'listo' : 'pendiente';
     }
 
     return (

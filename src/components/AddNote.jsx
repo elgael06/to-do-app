@@ -1,4 +1,4 @@
-import { Button, Card, Flex, Icon, TextareaItem } from 'antd-mobile'
+import { Button, Card, TextareaItem } from 'antd-mobile'
 import CardBody from 'antd-mobile/lib/card/CardBody';
 import CardFooter from 'antd-mobile/lib/card/CardFooter';
 import CardHeader from 'antd-mobile/lib/card/CardHeader'
@@ -10,15 +10,20 @@ export default function AddNote({set=e=>e}){
         data:'',
         status:'pendiente'
       });
-
-      const agregar = () => {
+      
+      const reset = () => {
+          setNote({
+              title:'',
+              data:'',
+              status:'pendiente'
+            });
+        }
+        
+    const agregar = () => {
         set(note);
-        setNote({
-            title:'',
-            data:'',
-            status:'pendiente'
-        });
-      }
+        reset();
+    }
+
     return(<div className='content-note'>
         <Card full>
           <CardHeader
@@ -47,7 +52,8 @@ export default function AddNote({set=e=>e}){
           <CardFooter 
             content={<Button
                 type='warning' 
-                style={{width:100}} 
+                style={{width:100}}
+                onClick={reset}
                 size='small'>Cancelar</Button>}
             extra={<Button 
                 type='primary' 
