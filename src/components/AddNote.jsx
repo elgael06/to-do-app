@@ -8,19 +8,19 @@ export default function AddNote({set=e=>e}){
     const [note,setNote] = useState({
         title:'',
         data:'',
-        status:'pendiente'
+        status:false
       });
       
-      const reset = () => {
-          setNote({
-              title:'',
-              data:'',
-              status:'pendiente'
-            });
-        }
+    const reset = () => {
+      setNote({
+        title:'',
+        data:'',
+        status:false
+      });
+    }
         
     const agregar = () => {
-        set(note);
+        set({...note});
         reset();
     }
 

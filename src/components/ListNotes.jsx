@@ -3,10 +3,13 @@ import CardBody from 'antd-mobile/lib/card/CardBody';
 import CardHeader from 'antd-mobile/lib/card/CardHeader';
 import React from 'react'
 
-export default function ListNotes({lista=[]}){
+export default function ListNotes({lista=[],updateNote=(note,index) =>null,status=false}){
 
     const cambioStatus = (status,index) => {
-        lista[index].status = status === 'pendiente' ? 'listo' : 'pendiente';
+        console.log('cambio status');
+         const dato = lista[index];
+         dato.status = !status;
+        updateNote(dato,index);
     }
 
     return (
@@ -15,14 +18,14 @@ export default function ListNotes({lista=[]}){
             margin:'10px 0',
             overflow:'auto'
           }}>
-            {lista.map((item,index)=>{
+            {lista.filter(e=>e.status===status).map((item,index)=>{
                  return(<div key={index}>
                      <Card color='#ffffff'>
                          <CardHeader 
                              title={item.title}
                              extra={<Checkbox 
-                                cambioStatus={()=>cambioStatus(item.status,index)}
-                                checked={item.status==='listo'}
+                                onChange={()=>cambioStatus(item.status,index)}
+                                checked={item.status}
                             />}
                          />
                          <CardBody>

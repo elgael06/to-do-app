@@ -6,6 +6,7 @@ import AddNote from './components/AddNote';
 import ListNotes from './components/ListNotes';
 
 function App() {
+  const [status, setStatus] = useState(false);
   const [lista,setLista] = useState([]);
 
   useEffect(()=>{
@@ -23,11 +24,19 @@ function App() {
   const selectSecment = (e) =>{
 
     console.log(e);
+    setStatus(e==='listo');
   }
   const setNote = newNote =>{
     const new_list = [...lista,newNote];
     setLista(new_list);
     localStorage.setItem('task-list',JSON.stringify(new_list));
+  }
+  const updateNote = (note,index) => {
+    const list = [...lista];
+    list[index] = {...note};
+    setLista(list);
+    localStorage.setItem('task-list',JSON.stringify(list));
+    
   }
   return (<div>
 
@@ -48,19 +57,24 @@ function App() {
         height:'calc( 100% - 56px )',
         margin:'0 10px',
       }}>
-      
+
       <WhiteSpace size='xl' />
+
       <SegmentedControl 
         values={['pendiente','listo']}
         onValueChange={selectSecment}
         tintColor='#00000060'
-        style={{fontSize:24,height:50}}
+        style={{fontSize:24,height:35}}
       />
       <WhiteSpace size='xl' />
 
       <AddNote set={setNote} />
 
-      <ListNotes lista={lista} />
+      <ListNotes 
+        updateNote={updateNote} 
+        lista={lista} 
+        status={status}
+      />
     </div>
 
    </div>
