@@ -4,10 +4,13 @@ import 'antd-mobile/dist/antd-mobile.css';
 import { Icon, NavBar, SegmentedControl, WhiteSpace } from 'antd-mobile';
 import AddNote from './components/AddNote';
 import ListNotes from './components/ListNotes';
+import alertaConfirm from './components/AlertaConfirm';
+
 
 function App() {
   const [status, setStatus] = useState(false);
   const [lista,setLista] = useState([]);
+  
 
   useEffect(()=>{
     const datos = localStorage.getItem('task-list');
@@ -19,7 +22,14 @@ function App() {
 
   const onClose = () => {
     console.log('salir');
-    window.close()
+    alertaConfirm({
+      title:'Salir',
+      data:'Seguro de sair!!!',
+      acept:'Salir',
+      onAcept:()=>window.close(),
+      cancel:'Cancelar',
+    });
+    
   }
   const selectSecment = (e) =>{
 
@@ -64,6 +74,7 @@ function App() {
         values={['pendiente','listo']}
         onValueChange={selectSecment}
         tintColor='#00000060'
+        selectedIndex={status ? 1 : 0}
         style={{fontSize:24,height:35}}
       />
       <WhiteSpace size='xl' />
