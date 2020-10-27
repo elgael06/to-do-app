@@ -1,10 +1,11 @@
 {
   "name": "to-do-app",
   "version": "0.1.0",
-  "private": true,
+  "homepage":"https://to-do-app-3fzbd.ondigitalocean.app",
+  "private": false,
+  "repository": "https://github.com/elgael06/to-do-app.git",
   "engines": {
-    "npm": "5.7.1",
-    "node": "^13"
+    "node": ">=0.12" 
   },
   "dependencies": {
     "antd-mobile": "^2.3.4",
