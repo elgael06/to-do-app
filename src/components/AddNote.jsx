@@ -1,4 +1,4 @@
-import { Button, Card, TextareaItem } from 'antd-mobile'
+import { Button, Card, Icon, TextareaItem } from 'antd-mobile'
 import CardBody from 'antd-mobile/lib/card/CardBody';
 import CardFooter from 'antd-mobile/lib/card/CardFooter';
 import CardHeader from 'antd-mobile/lib/card/CardHeader'
@@ -24,24 +24,33 @@ export default function AddNote({set=e=>e}){
         reset();
     }
 
-    return(<div className='content-note'>
+    return(<div className='content-note' style={{
+      width:'calc( 100% - 10px) ',
+      maxWidth:550
+    }}>
         <Card full>
           <CardHeader
             thumb='https://pbs.twimg.com/profile_images/950276667972472832/1qtkCeDK.jpg'
             thumbStyle={{
-              height:40,width:40
+              height:40,
+              width:40
             }}
             title={<TextareaItem
-                title='Nueva nota'
                 placeholder='Titulo...'
                 autoFocus
                 value={note.title}
                 onChange={e=>setNote({...note,title:e})}
             />}
+            extra={
+              <Icon type='cross-circle' onClick={reset} />
+            }
           />
-          <CardBody>
-            <TextareaItem 
-              rows={2}
+          <CardBody style={{
+            maxHeight:170,
+            overflow:'auto'
+          }}>
+            <TextareaItem
+              autoHeight
               placeholder='Descripcion...'
               disabled={!note.title}
               value={note.data}
@@ -50,11 +59,6 @@ export default function AddNote({set=e=>e}){
           </CardBody>
 
           <CardFooter 
-            content={<Button
-                type='warning' 
-                style={{width:100}}
-                onClick={reset}
-                size='small'>Cancelar</Button>}
             extra={<Button 
                 type='primary' 
                 style={{

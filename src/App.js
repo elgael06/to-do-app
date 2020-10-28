@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import './App.css';
 import 'antd-mobile/dist/antd-mobile.css';
 import { Icon, NavBar, SegmentedControl, WhiteSpace } from 'antd-mobile';
+
+import './App.css';
+
 import AddNote from './components/AddNote';
 import ListNotes from './components/ListNotes';
 import alertaConfirm from './components/AlertaConfirm';
+import Container from './components/Container';
 
 
 function App() {
@@ -48,6 +51,24 @@ function App() {
     localStorage.setItem('task-list',JSON.stringify(list));
     
   }
+  const eliminar = index => {
+    console.log(index);
+    const new_list = [...lista];
+    new_list.splice(index,1);
+
+    alertaConfirm({
+      title:'Eliminar',
+      data:'Seguro de eliminar nota?',
+      acept:'aceptar',
+      onAcept:()=>{
+        console.log('eliminar ',index);
+        console.log(new_list);
+        setLista(new_list);
+        localStorage.setItem('task-list',JSON.stringify(new_list));
+      },
+      cancel:'Cancelar',
+    });
+  }
   return (<div>
 
      <NavBar
@@ -61,12 +82,7 @@ function App() {
       ]}
     >Tareas</NavBar>
 
-    <div style={{
-        position:'absolute',
-        width:'calc( 100% - 20px )',
-        height:'calc( 100% - 56px )',
-        margin:'0 10px',
-      }}>
+    <Container>
 
       <WhiteSpace size='xl' />
 
@@ -75,7 +91,12 @@ function App() {
         onValueChange={selectSecment}
         tintColor='#00000060'
         selectedIndex={status ? 1 : 0}
-        style={{fontSize:24,height:35}}
+        style={{
+          fontSize:24,
+          height:35,
+          width:'calc( 100% - 10px) ',
+          maxWidth:600
+        }}
       />
       <WhiteSpace size='xl' />
 
@@ -85,8 +106,9 @@ function App() {
         updateNote={updateNote} 
         lista={lista} 
         status={status}
+        onDelete={eliminar}
       />
-    </div>
+    </Container>
 
    </div>
   );
