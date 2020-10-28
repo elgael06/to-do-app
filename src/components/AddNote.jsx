@@ -1,4 +1,4 @@
-import { Button, Card, Icon, TextareaItem } from 'antd-mobile'
+import { Button, Card, Icon, InputItem, TextareaItem } from 'antd-mobile'
 import CardBody from 'antd-mobile/lib/card/CardBody';
 import CardFooter from 'antd-mobile/lib/card/CardFooter';
 import CardHeader from 'antd-mobile/lib/card/CardHeader'
@@ -35,7 +35,8 @@ export default function AddNote({set=e=>e}){
               height:40,
               width:40
             }}
-            title={<TextareaItem
+            title={<InputItem
+                allowFullScreen
                 placeholder='Titulo...'
                 autoFocus
                 value={note.title}
